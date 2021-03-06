@@ -5,15 +5,26 @@
     
     
 <%
+	//Insert item------------------------------
 	if (request.getParameter("itemCode") != null)
 	 {
 		 Item itemObj = new Item();
-		 String stsMsg = itemObj.insertItem(request.getParameter("itemCode"),
+		 String stsMsg = itemObj.insertItem(
+			 request.getParameter("itemCode"),
 			 request.getParameter("itemName"),
 			 request.getParameter("itemPrice"),
 			 request.getParameter("itemDesc"));
 		 session.setAttribute("statusMsg", stsMsg);
 	 }
+
+
+	//Delete item----------------------------------
+	if (request.getParameter("itemID") != null) 
+	{ 
+		Item itemObj = new Item(); 
+		String stsMsg = itemObj.deleteItem(request.getParameter("itemID")); 
+		session.setAttribute("statusMsg", stsMsg); 
+	} 
 %>
 
     
@@ -21,31 +32,35 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" 
-rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" 
-crossorigin="anonymous">
+<title>Item Management</title>
+<link rel="stylesheet" href="Views/bootstrap.min.css">
+<link rel="stylesheet" href="Views/main-styles.css">
 </head>
 <body>
 
+	<div class="container">
 	<h1>Items Management</h1>
 	<form method="post" action="items.jsp">
 	 Item code: <input name="itemCode" class="form-control" type="text"><br>
 	 Item name: <input name="itemName" class="form-control" type="text"><br>
 	 Item price: <input name="itemPrice" class="form-control" type="text"><br>
 	 Item description: <input name="itemDesc" class="form-control" type="text"><br>
-	 <input name="btnSubmit" type="submit" value="Save">
-	</form>
+	 <input name="btnSubmit" type="submit" value="Save" class="btn btn-primary">
+	</form><br>
+	</div>
 	
-	<%
- 		out.print(session.getAttribute("statusMsg"));
-	%>
+	<div class="alert alert-success">
+		<%
+ 			out.print(session.getAttribute("statusMsg"));
+		%>
+	</div>
 	
 	
 	<br>
+	<br>
 	<%
-	 Item itemObj = new Item();
-	 out.print(itemObj.readItems());
+		 Item itemObj = new Item();
+		 out.print(itemObj.readItems());
 	%>
 	
 </body>

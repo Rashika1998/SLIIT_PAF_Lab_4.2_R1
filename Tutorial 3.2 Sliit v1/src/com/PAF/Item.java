@@ -36,7 +36,7 @@ public class Item {
 	
 	public String insertItem(String code, String name, String price, String desc)
 	{
-	 String output = "";
+		String output = "";
 	try
 	 {
 	 Connection con = connect();
@@ -105,10 +105,10 @@ public class Item {
 	 output += "<td>" + itemDesc + "</td>";
 	 // buttons
 	 output += "<td><input name='btnUpdate' "
-	 + " type='button' value='Update'></td>"
+	 + " type='button' value='Update' class='btn btn-primary'></td>"
 	 + "<td><form method='post' action='items.jsp'>"
 	 + "<input name='btnRemove' "
-	 + " type='submit' value='Remove'>"
+	 + " type='submit' value='Remove' class='btn btn-danger'>"
 	 + "<input name='itemID' type='hidden' "
 	 + " value='" + itemID + "'>" + "</form></td></tr>";
 	 }
@@ -128,6 +128,41 @@ public class Item {
 	
 	
 	
+	
 	//delete item
+	public String deleteItem(String itemID)
+	{ 
+		String output = ""; 
+	try
+	 { 
+		Connection con = connect(); 
+	 if (con == null) 
+	 { 
+	 return "Error while connecting to the database for deleting."; 
+	 } 
+		 // create a prepared statement
+		 String query = "delete from items where itemID=?"; 
+		 PreparedStatement preparedStmt = con.prepareStatement(query); 
+		 // binding values
+		 preparedStmt.setInt(1, Integer.parseInt(itemID)); 
+		 
+		 // execute the statement
+		 preparedStmt.execute(); 
+		 con.close(); 
+		 output = "Deleted successfully"; 
+	 } 
+	catch (Exception e) 
+	 { 
+		 output = "Error while deleting the item."; 
+		 System.err.println(e.getMessage()); 
+	 } 
+	return output; 
+	}
+	
+	
+	
+	
+	
+	
 
 }
