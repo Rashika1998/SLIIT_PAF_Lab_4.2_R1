@@ -1,4 +1,4 @@
-package com;
+package com.PAF;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.*;
@@ -129,24 +129,5 @@ public class Item {
 	
 	
 	//delete item
-	public String deleteItem(int itemID) {
-		
-        try {
-        	Connection con = connect();
-            PreparedStatement preparedStatement = con.prepareStatement("delete from items where itemID=?");
-            // Parameters start with 1
-            preparedStatement.setInt(1, itemID);
-            preparedStatement.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        
-		return null;
-    }
-	
-	
-	
-
 
 }
