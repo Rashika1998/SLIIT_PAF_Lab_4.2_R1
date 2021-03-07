@@ -70,6 +70,16 @@ function validateForm() {
 	nicValidation(nic.value, nic) 
 	mobileValidation(mobile.value, mobile)
 	
+	if(!password === password_confirm)
+	{
+		alert("passwords are not same.");
+	}
+	else
+	{
+		alert("Passwords are same.");
+	}
+	
+	
 }
 
 
